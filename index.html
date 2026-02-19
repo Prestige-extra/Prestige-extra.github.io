@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prestige</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            'accent': '#6A0DAD', // royal purple accent
+            'card-bg': 'rgba(40, 10, 60, 0.6)',
+            'card-border': 'rgba(106, 13, 173, 0.5)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #050505;
+      color: #ffffff;
+    }
+
+    .glass-card {
+      background: rgba(40, 10, 60, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(106, 13, 173, 0.5);
+      border-radius: 2rem;
+    }
+
+    .accordion-content {
+      transition: max-height 0.5s ease;
+    }
+  </style>
+</head>
+
+<body class="antialiased selection:bg-accent/30 selection:text-white">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 bg-[#050505]/80 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="../index.html" class="text-white text-lg font-bold tracking-tight hover:text-accent transition-colors">
+        Prestige.
+      </a>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-6 pt-32 pb-20 flex flex-col lg:flex-row gap-12">
+
+    <!-- Screenshot -->
+    <div class="lg:w-2/3 space-y-8">
+      <div class="glass-card overflow-hidden shadow-2xl group">
+        <img src="https://prestigeclient.vip/assets/img/gui.png" alt="menu"
+          class="w-full h-auto transform transition-transform duration-700 group-hover:scale-[1.02]">
+      </div>
+
+      <div class="glass-card p-8">
+        <h2 class="text-3xl font-bold text-white mb-4">Overview</h2>
+        <p class="text-neutral-300 text-lg leading-relaxed">
+          Prestige made better
+        </p>
+      </div>
+      <!-- Download -->
+<div class="glass-card p-6">
+  <h2 class="text-2xl font-bold text-accent mb-4">Download</h2>
+
+  <button id="downloadBtn"
+    data-url="https://github.com/Prestige-extra/Prestige-extra.github.io/releases/download/a/Prestige+.jar"
+    onclick="startDownload()"
+    class="w-full py-3 rounded-xl bg-accent text-white font-semibold hover:brightness-110 transition relative overflow-hidden">
+    <span id="btnText">Download</span>
+  </button>
+
+  <div class="mt-4 h-3 w-full bg-[#1C0C2A]/60 rounded-full overflow-hidden hidden" id="progressWrap">
+    <div id="progressBar"
+      class="h-full bg-accent rounded-full transition-all duration-300"
+      style="width:0%">
+    </div>
+  </div>
+
+  <p id="downloadStatus" class="text-sm text-neutral-400 mt-3 hidden">
+    Download in progress…
+  </p>
+</div>
+
+      <!-- Tech Stack -->
+      <div class="glass-card p-6">
+        <h2 class="text-2xl font-bold text-accent mb-4">Langs</h2>
+        <div class="flex flex-wrap gap-3">
+          <div class="flex items-center gap-2 px-3 py-1 bg-[#1C0C2A]/50 rounded-full hover:bg-[#1C0C2A]/70 transition-colors">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-plain.svg" class="w-5 h-5" alt="C#"><span>C#</span>
+        </div>
+            <div class="flex items-center gap-2 text-white/80 hover:text-white transition-colors">
+              <img src="https://cdn.simpleicons.org/Java/white" class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" alt="Unity">
+              <span class="text-sm font-medium">Java</span>
+            </div>
+            <div class="flex items-center gap-2 text-white/80 hover:text-white transition-colors">
+              <img src="https://cdn.simpleicons.org/moo/white" class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" alt="Mono">
+              <span class="text-sm font-medium">Mono</span>
+            </div>
+            <div class="flex items-center gap-2 text-white/80 hover:text-white transition-colors">
+              <img src="https://raw.githubusercontent.com/pardeike/Harmony/master/HarmonyLogo.png" class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" alt="Harmony">
+              <span class="text-sm font-medium">Harmony</span>
+            </div>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5 bg-[#050505] py-12">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-16">
+      <div class="text-neutral-500 text-sm">© 2023 Prestige. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    function toggleAccordion(button) {
+      const content = button.nextElementSibling;
+      const chevron = button.querySelector('i[data-lucide="chevron-down"]');
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+        chevron.style.transform = 'rotate(0deg)';
+      } else {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        chevron.style.transform = 'rotate(180deg)';
+      }
+    }
+  </script>
+  <script>
+  lucide.createIcons();
+
+  function toggleAccordion(button) {
+    const content = button.nextElementSibling;
+    const chevron = button.querySelector('i[data-lucide="chevron-down"]');
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
+      chevron.style.transform = 'rotate(0deg)';
+    } else {
+      content.style.maxHeight = content.scrollHeight + 'px';
+      chevron.style.transform = 'rotate(180deg)';
+    }
+  }
+
+  function startDownload() {
+    const btn = document.getElementById("downloadBtn");
+    const text = document.getElementById("btnText");
+    const bar = document.getElementById("progressBar");
+    const wrap = document.getElementById("progressWrap");
+    const status = document.getElementById("downloadStatus");
+
+    btn.disabled = true;
+    btn.classList.add("opacity-60", "cursor-not-allowed");
+    text.textContent = "Preparing...";
+    wrap.classList.remove("hidden");
+    status.classList.remove("hidden");
+
+    let width = 0;
+    const interval = setInterval(() => {
+      width += Math.random() * 10;
+      if (width >= 100) width = 100;
+      bar.style.width = width + "%";
+      text.textContent = "Downloading... " + Math.floor(width) + "%";
+
+      if (width >= 100) {
+        clearInterval(interval);
+        text.textContent = "Download Complete";
+
+        // 🔗 REAL DOWNLOAD
+        const fileUrl = btn.getAttribute("data-url");
+        const a = document.createElement("a");
+        a.href = fileUrl;
+        a.download = "";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        btn.classList.remove("opacity-60", "cursor-not-allowed");
+        btn.disabled = false;
+
+        setTimeout(() => {
+          wrap.classList.add("hidden");
+          status.classList.add("hidden");
+          bar.style.width = "0%";
+          text.textContent = "Download";
+        }, 2000);
+      }
+    }, 300);
+  }
+</script>
+
+</body>
+</html>
